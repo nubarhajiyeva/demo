@@ -8,7 +8,6 @@ package dao.impl;
 import entity.Country;
 import entity.Skill;
 import entity.User;
-import entity.UserSkill;
 import dao.inter.UserDaoInter;
 import java.sql.Connection;
 import java.sql.Date;
@@ -48,7 +47,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
             Statement stmt = c.createStatement();
             stmt.execute("select "
                     + "  u.*, "
-                    + "  n.nationality as nationality, "
+                    + "  n.nationality, "
                     + "  c.name as birthplace "
                     + "  from user  u"
                     + "  left join country n on u.nationality_id=n.id "
@@ -131,41 +130,6 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
             ex.printStackTrace();
             return false;
         }
-    }
-
-    private UserSkill getUserSkill(ResultSet rs) throws Exception {
-        int userId=rs.getInt("id");
-        int skillId=rs.getInt("skill_id");
-        String skillName=rs.getString("skill_name");
-        int power= rs.getInt("power");
-        return new UserSkill(null, new User(userId), new Skill(skillId,skillName), power);
-    }
-
-    @Override
-    public List<UserSkill> getAllSkillByUserId(int userId) {
-        List<UserSkill> result = new ArrayList<>();
-        try (Connection c = connect()) {
-            PreparedStatement stmt = c.prepareStatement(" select "
-                    + " u.*, "
-                    + " us.skill_id, "
-                    + " s.name as skill_name,"
-                    + " us.power "
-                    + " from user_skill us"
-                    + " left join user u on us.user_id=u.id "
-                    + " left join skill s on us.skill_id=s.id"
-                    + " where us.user_id=?  ");
-            stmt.setInt(1, userId);
-            stmt.execute();
-            ResultSet rs = stmt.getResultSet();
-
-            while (rs.next()) {
-                UserSkill u = getUserSkill(rs);
-                result.add(u);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return result;
     }
 }
 

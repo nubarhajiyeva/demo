@@ -15,6 +15,7 @@ public class Country {
     private String nationality;
 
     public Country() {
+    
     }
 
     public Country(int id, String name, String countryName) {
@@ -51,7 +52,4 @@ public class Country {
     public String toString() {
         return "Country{" + "id=" + id + ", name=" + name + ", nationality=" + nationality + '}';
     }
-
-    
-
 }

@@ -7,7 +7,11 @@ package main;
 
 import entity.User;
 import dao.impl.UserDaoImpl;
+import dao.inter.CountryDaoInter;
+import dao.inter.EmploymentHistoryDaoInter;
+import dao.inter.SkillDaoInter;
 import dao.inter.UserDaoInter;
+import entity.Skill;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,13 +24,10 @@ import java.util.List;
  */
 public class Main {
 
-  
-
     public static void main(String[] args) throws Exception {
-        UserDaoInter userdao=new UserDaoImpl();
-     
-       
-        System.out.println(userdao.getAllSkillByUserId(5));    
+       CountryDaoInter dao = Contex.instanceCountryDao();
+        System.out.println(dao.getAllCountry());
+
         // userdao.removeUser(2);
 //        List<User> list=userdao.getAll();
 //        System.out.println("list="+list);

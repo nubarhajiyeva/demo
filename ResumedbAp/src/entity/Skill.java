@@ -12,13 +12,28 @@ package entity;
 public class Skill {
     private int id;
     private String name;
+    private UserSkill userskill;
 
+    public UserSkill getUserskill() {
+        return userskill;
+    }
+
+    public void setUserskill(UserSkill userskill) {
+        this.userskill = userskill;
+    }
+    
     public Skill() {
     }
 
     public Skill(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Skill(int id, String name, UserSkill userskill) {
+        this.id = id;
+        this.name = name;
+        this.userskill = userskill;
     }
 
     public int getId() {
@@ -39,8 +54,9 @@ public class Skill {
 
     @Override
     public String toString() {
-        return "Skill{" + "id=" + id + ", name=" + name + '}';
+        return "Skill{" + "id=" + id + ", name=" + name + ", userskill=" + userskill + '}';
     }
+
     
     
 }

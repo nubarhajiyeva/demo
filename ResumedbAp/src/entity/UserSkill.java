@@ -15,6 +15,12 @@ public class UserSkill {
     private Skill skill;
     private int power;
 
+  
+
+    public UserSkill(int power) {
+        this.power = power;
+    }
+
     public UserSkill() {
     }
 
